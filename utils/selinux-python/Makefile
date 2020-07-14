@@ -6,18 +6,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=selinux-python
-PKG_VERSION:=2.9
+PKG_VERSION:=3.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20190315
-PKG_HASH:=3650b5393b0d1790cac66db00e34f059aa91c23cfe3c2559676594e295d75fde
+PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20200710
+PKG_HASH:=f4d0a1a030bc291a6af498b26e0676b745075dd289a8ba16cdec86c3ea8f2f02
 PKG_BUILD_DEPENDS:=PACKAGE_selinux-audit2allow:libsepol
 
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
 
 include $(INCLUDE_DIR)/package.mk
-include ../../lang/python/python-package.mk
+include ../../lang/python/python3-package.mk
 
 #
 # common definitions
@@ -25,7 +25,7 @@ include ../../lang/python/python-package.mk
 
 define Package/selinux-python/Default
   SECTION:=utils
-  DEPENDS:=+python +python-libselinux
+  DEPENDS:=+python3 +python-libselinux
   CATEGORY:=Utilities
   URL:=http://selinuxproject.org/page/Main_Page
 endef
@@ -36,8 +36,8 @@ define Package/selinux-python/Default/description
 endef
 
 MAKE_VARS = \
-	PYTHON=$(HOST_PYTHON_BIN) \
-	PYTHONLIBDIR=$(PYTHON_PKG_DIR)
+	PYTHON=$(HOST_PYTHON3_BIN) \
+	PYTHONLIBDIR=$(PYTHON3_PKG_DIR)
 
 define Build/Compile
 	$(call Build/Compile/Default,all)
@@ -50,7 +50,7 @@ endef
 define Package/selinux-audit2allow
 $(call Package/selinux-python/Default)
   TITLE:=selinux-audit2allow
-  DEPENDS:=+python-sepolgen +libsepol
+  DEPENDS:=+python-sepolgen +libselinux +libsepol
 endef
 
 define Package/selinux-audit2allow/description

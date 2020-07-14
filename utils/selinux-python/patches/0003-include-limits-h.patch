@@ -1,0 +1,11 @@
+diff -u --recursive selinux-python-3.1-vanilla/audit2allow/sepolgen-ifgen-attr-helper.c selinux-python-3.1/audit2allow/sepolgen-ifgen-attr-helper.c
+--- selinux-python-3.1-vanilla/audit2allow/sepolgen-ifgen-attr-helper.c	2020-07-10 11:17:15.000000000 -0400
++++ selinux-python-3.1/audit2allow/sepolgen-ifgen-attr-helper.c	2020-07-12 14:50:09.762781375 -0400
+@@ -28,6 +28,7 @@
+ 
+ #include <selinux/selinux.h>
+ 
++#include <limits.h>
+ #include <stdio.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
