@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libsemanage
-PKG_VERSION:=2.9
+PKG_VERSION:=3.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20190315
-PKG_HASH:=2576349d344492e73b468059767268dec1dabd8c35f3c7222c3ec2448737bc1c
+PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20200710
+PKG_HASH:=22d6c75526e40d1781c30bcf29abf97171bdfe6780923f11c8e1c76a75a21ff8
 HOST_BUILD_DEPENDS:=audit/host libselinux/host bzip2/host
 
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
