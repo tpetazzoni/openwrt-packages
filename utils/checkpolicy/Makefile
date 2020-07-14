@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=checkpolicy
-PKG_VERSION:=2.9
+PKG_VERSION:=3.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20190315
-PKG_HASH:=a946c32b284532447857e4c48830f8816867c61220c8c08bdd32e6f691335f8e
+PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20200710
+PKG_HASH:=dfc7707070520c93b14fbbdfdbe081364d806bf28e3e79e10318c2594c77bbb2
 HOST_BUILD_DEPENDS:=libselinux/host
 
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
