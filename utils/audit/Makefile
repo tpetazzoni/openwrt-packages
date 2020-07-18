@@ -16,6 +16,8 @@ PKG_HASH:=0e5d4103646e00f8d1981e1cd2faea7a2ae28e854c31a803e907a383c5e2ecb7
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
 PKG_FIXUP:=autoreconf
 
+PKG_USE_MIPS16:=0
+
 include $(INCLUDE_DIR)/package.mk
 
 define Package/audit/Default
