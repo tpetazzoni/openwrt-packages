@@ -53,11 +53,11 @@ endef
 # builds is a small host tool that gets run as part of the build
 # process.
 MAKE_FLAGS += \
-	TEST_TOOLCHAIN=$(STAGING_DIR_HOSTPKG) \
+	TEST_TOOLCHAIN="$(STAGING_DIR_HOSTPKG)" \
 	BINDIR=/bin \
 	SBINDIR=/sbin \
-	CC=$(HOSTCC) \
-	CFLAGS=$(HOST_CFLAGS)
+	CC="$(HOSTCC)" \
+	CFLAGS="$(HOST_CFLAGS)"
 
 define Build/Configure
 	$(SED) "/MONOLITHIC/c\MONOLITHIC = y" $(PKG_BUILD_DIR)/build.conf
