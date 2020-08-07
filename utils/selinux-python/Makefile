@@ -89,7 +89,7 @@ endef
 define Package/selinux-semanage
 $(call Package/selinux-python/Default)
   TITLE:=selinux-semanage
-  DEPENDS:=+python-sepolicy
+  DEPENDS:=+python-sepolicy +python-libsemanage +setools
 endef
 
 define Package/selinux-semanage/description
