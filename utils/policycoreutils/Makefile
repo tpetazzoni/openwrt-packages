@@ -48,6 +48,12 @@ HOST_MAKE_FLAGS += \
 	ETCDIR=$(STAGING_DIR_HOSTPKG)/etc
 
 define Package/policycoreutils/install
+	# Remove programs provided by BusyBox.
+	$(RM) -f $(PKG_INSTALL_DIR)/sbin/restorecon
+	$(RM) -f $(PKG_INSTALL_DIR)/sbin/setfiles
+	$(RM) -f $(PKG_INSTALL_DIR)/usr/sbin/load_policy
+	$(RM) -f $(PKG_INSTALL_DIR)/usr/sbin/sestatus
+	$(RM) -f $(PKG_INSTALL_DIR)/usr/sbin/setsebool
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(CP) $(PKG_INSTALL_DIR)/usr/bin/* $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/usr/sbin
