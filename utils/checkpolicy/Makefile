@@ -12,6 +12,7 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20200710
 PKG_HASH:=dfc7707070520c93b14fbbdfdbe081364d806bf28e3e79e10318c2594c77bbb2
+PKG_INSTALL:=1
 HOST_BUILD_DEPENDS:=libselinux/host
 
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
@@ -37,6 +38,11 @@ include $(INCLUDE_DIR)/host-build.mk
 
 HOST_MAKE_FLAGS += \
 	PREFIX=$(STAGING_DIR_HOSTPKG)
+
+define Package/checkpolicy/install
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(CP) $(PKG_INSTALL_DIR)/usr/bin/* $(1)/usr/bin/
+endef
 
 $(eval $(call HostBuild))
 $(eval $(call BuildPackage,checkpolicy))
