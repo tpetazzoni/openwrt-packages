@@ -12,11 +12,13 @@ PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/20200710
 PKG_HASH:=22d6c75526e40d1781c30bcf29abf97171bdfe6780923f11c8e1c76a75a21ff8
+PKG_BUILD_DEPENDS:=PACKAGE_python-libsemanage:python3 PACKAGE_python-libsemanage:swig/host
 HOST_BUILD_DEPENDS:=audit/host libselinux/host bzip2/host
 
 PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
 
 include $(INCLUDE_DIR)/package.mk
+include ../../lang/python/python3-package.mk
 
 define Package/libsemanage
   SECTION:=libs
@@ -24,6 +26,14 @@ define Package/libsemanage
   CATEGORY:=Libraries
   TITLE:=SELinux policy management library
   URL:=http://selinuxproject.org/page/Main_Page
+endef
+
+define Package/python-libsemanage
+  TITLE:=Python bindings for the SELinux policy management library
+  SUBMENU:=Python
+  SECTION:=lang
+  CATEGORY:=Languages
+  DEPENDS:=+python3 +libsemanage
 endef
 
 define Package/libsemanage/description
@@ -41,15 +51,32 @@ include $(INCLUDE_DIR)/host-build.mk
 HOST_MAKE_FLAGS += \
 	PREFIX=$(STAGING_DIR_HOSTPKG)
 
+MAKE_FLAGS += \
+	PYTHON=$(PYTHON3) \
+        PYINC="-I $(PYTHON3_INC_DIR)" \
+        PYLIBS="-lpython$(PYTHON3_VERSION)" \
+
+ifdef CONFIG_PACKAGE_python-libsemanage
+  define Build/Compile/python-libsemanage
+        $(call Build/Compile/Default,swigify pywrap)
+  endef
+
+  define Build/Install/python-libsemanage
+        $(call Build/Install/Default,install-pywrap)
+  endef
+endif
+
 define Build/Configure
 endef
 
 define Build/Compile
 	$(call Build/Compile/Default,all)
+	$(Build/Compile/python-libsemanage)
 endef
 
 define Build/Install
 	$(call Build/Install/Default,install)
+	$(Build/Install/python-libsemanage)
 endef
 
 define Build/InstallDev
@@ -68,3 +95,5 @@ endef
 
 $(eval $(call HostBuild))
 $(eval $(call BuildPackage,libsemanage))
+$(eval $(call Py3Package,python-libsemanage))
+$(eval $(call BuildPackage,python-libsemanage))
